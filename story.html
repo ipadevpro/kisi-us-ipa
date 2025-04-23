@@ -2,45 +2,103 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>📖 Cerita IPA | The Untold Stories</title>
+  <title>Kumpulan Cerita IPA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .story-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px;
+    }
 
-  <!-- Font Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    .story-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 300px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .story-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .story-content {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .full-story {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: #36d1dc;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body class="story-page">
-  <div class="container-story">
-    <header>
-      <h1>📖 IPA: The Untold Stories</h1>
-      <button onclick="window.location.href='index.html'" class="btn-back">⬅️ Kembali ke Menu</button>
-    </header>
+<body>
+  <div class="story-container" id="storyList"></div>
 
-    <div id="story-list" class="story-list">
-      <p>Sedang memuat cerita...</p>
-    </div>
+  <div class="full-story" id="fullStory">
+    <h2 id="fullTitle"></h2>
+    <div id="fullContent"></div>
+    <a class="back-btn" onclick="goBack()">⬅️ Kembali ke daftar cerita</a>
   </div>
 
   <script>
-    async function ambilCerita() {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbXXXXXXXXXXX/exec');
-      const data = await res.json();
+    const endpoint = 'https://script.google.com/macros/s/AKfycbzT68ohmGP_QnZHrtnN_VcS_cXuaZ-KiYbTgnxVu_xt0gTm3MAjvpKRzfa42Ji9qIF_Lw/exec';
 
-      const container = document.getElementById('story-list');
-      container.innerHTML = '';
-
-      data.cerita.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'story-card';
-        card.innerHTML = `
-          <h2>${item.judul}</h2>
-          <div class="isi" style="margin-top:10px;">${item.isi}</div>
-        `;
-        container.appendChild(card);
+    fetch(endpoint)
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('storyList');
+        data.cerita.forEach((cerita, i) => {
+          const div = document.createElement('div');
+          div.className = 'story-card';
+          div.innerHTML = `
+            <div class="story-title">${cerita.judul}</div>
+            <div class="story-content">${cerita.isi.slice(0, 100)}...</div>
+          `;
+          div.onclick = () => showFull(cerita.judul, cerita.isi);
+          list.appendChild(div);
+        });
       });
+
+    function showFull(judul, isi) {
+      document.getElementById('storyList').style.display = 'none';
+      document.getElementById('fullStory').style.display = 'block';
+      document.getElementById('fullTitle').innerText = judul;
+      document.getElementById('fullContent').innerHTML = isi;
     }
 
-    ambilCerita();
+    function goBack() {
+      document.getElementById('storyList').style.display = 'flex';
+      document.getElementById('fullStory').style.display = 'none';
+    }
   </script>
 </body>
 </html>
