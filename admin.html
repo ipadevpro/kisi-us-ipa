@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🛠 Admin Cerita | IPA: The Untold Stories</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Font Gen Z vibes -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- TinyMCE -->
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+    tinymce.init({
+      selector: '#isiCerita',
+      height: 300,
+      menubar: false,
+      plugins: 'lists link image code',
+      toolbar: 'undo redo | bold italic underline | bullist numlist | alignleft aligncenter alignright | code',
+      branding: false
+    });
+  </script>
+</head>
+<body class="admin-page">
+  <div class="admin-container">
+    <h1>🛠 Panel Admin Cerita</h1>
+    <p class="desc">Tulis dan kelola cerita IPA rahasia kamu di sini 😎</p>
+
+    <input type="password" id="adminKey" placeholder="🔒 Masukkan Secret Key" class="input-field" />
+
+    <input type="text" id="judulCerita" placeholder="📝 Judul Cerita" class="input-field" />
+
+    <textarea id="isiCerita"></textarea>
+
+    <button class="btn-submit" onclick="kirimCerita()">🚀 Simpan Cerita</button>
+
+    <p id="status" class="status-msg"></p>
+  </div>
+
+  <script>
+    async function kirimCerita() {
+      const key = document.getElementById('adminKey').value;
+      const judul = document.getElementById('judulCerita').value;
+      const isi = tinymce.get('isiCerita').getContent();
+
+      const res = await fetch('https://script.google.com/macros/s/AKfycbXXXXXXXXXXXXXX/exec', {
+        method: 'POST',
+        body: JSON.stringify({
+          key: key,
+          judul: judul,
+          isi: isi
+        })
+      });
+
+      const data = await res.json();
+      document.getElementById('status').innerText = data.message;
+    }
+  </script>
+</body>
+</html>
