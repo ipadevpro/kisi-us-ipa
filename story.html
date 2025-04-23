@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📖 Cerita IPA | The Untold Stories</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Font Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="story-page">
+  <div class="container-story">
+    <header>
+      <h1>📖 IPA: The Untold Stories</h1>
+      <button onclick="window.location.href='index.html'" class="btn-back">⬅️ Kembali ke Menu</button>
+    </header>
+
+    <div id="story-list" class="story-list">
+      <p>Sedang memuat cerita...</p>
+    </div>
+  </div>
+
+  <script>
+    async function ambilCerita() {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbXXXXXXXXXXX/exec');
+      const data = await res.json();
+
+      const container = document.getElementById('story-list');
+      container.innerHTML = '';
+
+      data.cerita.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'story-card';
+        card.innerHTML = `
+          <h2>${item.judul}</h2>
+          <div class="isi" style="margin-top:10px;">${item.isi}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    ambilCerita();
+  </script>
+</body>
+</html>
