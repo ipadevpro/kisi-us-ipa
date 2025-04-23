@@ -2,40 +2,124 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Panel - Tulis Cerita</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Cerita IPA</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tiny.cloud/1/b3qhsaf786u20qnu9zskxwlwqcmkhiaffsxsnyt4hb9seo79/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
-  <!-- TinyMCE CDN -->
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      padding: 30px;
+    }
+
+    .admin-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 20px;
+      color: #34495e;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1em;
+      background: #8E44AD;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #732d91;
+    }
+
+    .back-btn {
+      display: block;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .back-btn a {
+      text-decoration: none;
+      color: #3498db;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-container">
+    <h2>✍️ Tulis Cerita IPA</h2>
+
+    <label for="judul">Judul Cerita</label>
+    <input type="text" id="judul" placeholder="Contoh: Rahasia Reaksi Kimia 🔥">
+
+    <label for="isiCerita">Isi Cerita</label>
+    <textarea id="isiCerita"></textarea>
+
+    <button onclick="simpanCerita()">💾 Simpan Cerita</button>
+
+    <div class="back-btn">
+      <a href="index.html">← Kembali ke Beranda</a>
+    </div>
+  </div>
 
   <script>
+    // Ganti dengan API key kamu dari tiny.cloud
     tinymce.init({
       selector: '#isiCerita',
       height: 300,
       menubar: false,
-      plugins: 'link lists code',
-      toolbar: 'undo redo | styles | bold italic underline | bullist numlist | link | code',
-      content_style: 'body { font-family: Poppins, sans-serif; font-size:14px }'
+      plugins: 'link image lists code',
+      toolbar: 'undo redo | formatselect | bold italic underline | bullist numlist | link image | code',
+      branding: false
     });
+
+    function simpanCerita() {
+      const judul = document.getElementById("judul").value;
+      const isi = tinymce.get("isiCerita").getContent();
+
+      if (!judul || !isi) {
+        alert("Isi semua field terlebih dahulu!");
+        return;
+      }
+
+      // Contoh: Simpan ke localStorage, nanti bisa diubah jadi ke Firebase / AppScript
+      const cerita = { judul, isi, waktu: new Date().toISOString() };
+      let semuaCerita = JSON.parse(localStorage.getItem("ceritaIPA") || "[]");
+      semuaCerita.push(cerita);
+      localStorage.setItem("ceritaIPA", JSON.stringify(semuaCerita));
+
+      alert("Cerita berhasil disimpan!");
+      window.location.href = "story.html";
+    }
   </script>
-</head>
-<body class="admin-page">
-  <div class="container">
-    <h2 class="title">📝 Tulis Cerita IPA</h2>
-
-    <form id="formCerita">
-      <input type="text" id="judul" name="judul" placeholder="Judul Cerita" required class="input">
-      <textarea id="isiCerita" name="isi"></textarea>
-      <input type="password" id="secret" placeholder="Kata Rahasia" required class="input">
-
-      <button type="submit" class="btn-submit">Kirim Cerita</button>
-    </form>
-
-    <div id="notif" class="notif" style="display: none;"></div>
-    <a href="index.html" class="btn-back">⬅️ Kembali ke Landing Page</a>
-  </div>
-
-  <script src="admin.js"></script>
 </body>
 </html>
