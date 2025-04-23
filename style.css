@@ -66,3 +66,67 @@ body {
   font-weight: 500;
   color: #28a745;
 }
+/* Story Page */
+.story-page {
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  padding: 30px 15px;
+}
+
+.container-story {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-back {
+  background: #ff758c;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-back:hover {
+  background: #ff6a85;
+}
+
+/* Story Card */
+.story-card {
+  background: #f9f9f9;
+  border-left: 5px solid #36d1dc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.story-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.story-card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
