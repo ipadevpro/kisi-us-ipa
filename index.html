@@ -8,20 +8,177 @@
 
   <!-- Font vibe Gen Z -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom right, #fceabb, #f8b500);
+      color: #333;
+      min-height: 100vh;
+      position: relative;
+    }
+    .landing-container {
+      text-align: center;
+      padding: 70px 20px;
+    }
+    .main-title {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    .tagline {
+      font-size: 1.2em;
+      opacity: 0.8;
+    }
+    .action-btns {
+      margin-top: 40px;
+    }
+    .btn-landing {
+      display: inline-block;
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #333;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+    .btn-landing:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .footer-text {
+      margin-top: 60px;
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
+
+    /* Tombol Admin Rahasia */
+    #secretBtn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: white;
+      z-index: 1000;
+      opacity: 0.6;
+    }
+    #secretBtn:hover {
+      opacity: 1;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      color: #333;
+      margin: 20% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-content input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 15px;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+    }
+
+    .modal-content button {
+      margin-top: 15px;
+      padding: 10px 25px;
+      background: #8E44AD;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #loginError {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    #closeModal {
+      float: right;
+      font-size: 22px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body class="landing-page">
+
+  <!-- Tombol Rahasia Admin -->
+  <button id="secretBtn" title="🔐 Admin Mode">👁️‍🗨️</button>
+
+  <!-- Modal Login Admin -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2>Login Admin</h2>
+      <input type="password" id="adminPassword" placeholder="Masukkan password...">
+      <button onclick="checkPassword()">Masuk</button>
+      <p id="loginError">Password salah!</p>
+    </div>
+  </div>
+
   <div class="landing-container">
     <h1 class="main-title">IPA: The Untold Stories</h1>
     <p class="tagline">Cerita rahasia di balik dunia sains. Siap untuk mengeksplorasi?</p>
 
     <div class="action-btns">
       <a href="story.html" class="btn-landing">📖 Baca Cerita</a>
-      <a href="admin.html" class="btn-landing btn-alt">✍️ Tulis Cerita</a>
     </div>
 
     <footer>
       <p class="footer-text">by <strong>@ipadevpro</strong> ⚡</p>
     </footer>
   </div>
+
+  <script>
+    const secretBtn = document.getElementById("secretBtn");
+    const modal = document.getElementById("loginModal");
+    const closeModal = document.getElementById("closeModal");
+
+    secretBtn.onclick = () => modal.style.display = "block";
+    closeModal.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => {
+      if (event.target == modal) modal.style.display = "none";
+    };
+
+    function checkPassword() {
+      const input = document.getElementById("adminPassword").value;
+      const errorText = document.getElementById("loginError");
+      const correctPassword = "suksesbesar96"; // Ganti sesuai password kamu
+
+      if (input === correctPassword) {
+        window.location.href = "admin.html";
+      } else {
+        errorText.style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>
