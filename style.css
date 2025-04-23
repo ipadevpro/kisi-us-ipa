@@ -203,3 +203,51 @@ header h1 {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.admin-page .container {
+  max-width: 700px;
+  margin: 50px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.input, .btn-submit {
+  width: 100%;
+  margin: 15px 0;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.btn-submit {
+  background-color: #36d1dc;
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: #5b86e5;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+}
+
+.notif {
+  margin-top: 15px;
+  font-weight: 600;
+}
