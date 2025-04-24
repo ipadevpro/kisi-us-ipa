@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- Font vibe Gen Z -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
       margin: 0;
-      background: linear-gradient(to bottom right, #fceabb, #f8b500);
+      background: linear-gradient(45deg, #FAD961 0%, #F76B1C 100%);
       color: #333;
       min-height: 100vh;
       position: relative;
@@ -23,38 +24,48 @@
       padding: 70px 20px;
     }
     .main-title {
-      font-size: 3em;
+      font-size: 3.5rem;
+      font-weight: 800;
       margin-bottom: 10px;
+      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+      animation: pulse 2s infinite;
     }
     .tagline {
-      font-size: 1.2em;
-      opacity: 0.8;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 40px;
+      font-weight: 500;
     }
     .action-btns {
       margin-top: 40px;
     }
     .btn-landing {
       display: inline-block;
-      padding: 15px 25px;
+      padding: 16px 32px;
       margin: 10px;
-      font-size: 1em;
+      font-size: 1.1rem;
       border: none;
-      border-radius: 10px;
-      background: #ffffff;
-      color: #333;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      color: white;
       text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: all 0.2s ease;
+      box-shadow: 0 7px 14px rgba(255, 107, 107, 0.3);
+      transition: all 0.3s ease;
+      font-weight: 700;
     }
     .btn-landing:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
     }
 
     .footer-text {
       margin-top: 60px;
-      font-size: 0.9em;
-      opacity: 0.7;
+      font-size: 1rem;
+      opacity: 0.8;
+      font-weight: 500;
     }
 
     /* Tombol Admin Rahasia */
@@ -64,14 +75,16 @@
       right: 15px;
       background: transparent;
       border: none;
-      font-size: 22px;
+      font-size: 25px;
       cursor: pointer;
       color: white;
       z-index: 1000;
       opacity: 0.6;
+      transition: all 0.3s ease;
     }
     #secretBtn:hover {
       opacity: 1;
+      transform: scale(1.1) rotate(5deg);
     }
 
     /* Modal */
@@ -84,76 +97,132 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0,0,0,0.7);
+      animation: fadeIn 0.3s ease;
     }
 
     .modal-content {
       background-color: #fff;
       color: #333;
-      margin: 20% auto;
-      padding: 30px;
-      border-radius: 15px;
+      margin: 15% auto;
+      padding: 35px;
+      border-radius: 20px;
       width: 90%;
       max-width: 400px;
       text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      animation: slideInUp 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .modal-content input {
-      width: 80%;
-      padding: 10px;
+      width: 85%;
+      padding: 14px;
       margin-top: 15px;
-      border: 1px solid #aaa;
-      border-radius: 8px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .modal-content input:focus {
+      outline: none;
+      border-color: #4ECDC4;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
     }
 
     .modal-content button {
-      margin-top: 15px;
-      padding: 10px 25px;
-      background: #8E44AD;
+      margin-top: 20px;
+      padding: 14px 30px;
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
       border: none;
       color: white;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    }
+
+    .modal-content button:hover {
+      background: linear-gradient(135deg, #FF8E53, #FF6B6B);
+      transform: translateY(-3px);
+      box-shadow: 0 7px 14px rgba(255, 107, 107, 0.4);
     }
 
     #loginError {
-      color: red;
-      margin-top: 10px;
+      color: #FF6B6B;
+      margin-top: 15px;
       display: none;
+      font-weight: 500;
     }
 
     #closeModal {
       float: right;
-      font-size: 22px;
+      font-size: 24px;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #closeModal:hover {
+      transform: rotate(90deg);
+      color: #FF6B6B;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body class="landing-page">
 
   <!-- Tombol Rahasia Admin -->
-  <button id="secretBtn" title="🔐 Admin Mode">👁️‍🗨️</button>
+  <button id="secretBtn" title="🔐 Admin Mode">✨</button>
 
   <!-- Modal Login Admin -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
       <span id="closeModal">&times;</span>
       <h2>Login Admin</h2>
-      <input type="password" id="adminPassword" placeholder="Masukkan password...">
-      <button onclick="checkPassword()">Masuk</button>
-      <p id="loginError">Password salah!</p>
+      <input type="password" id="adminPassword" placeholder="Ketik password kamu disini...">
+      <button onclick="checkPassword()">Gaskeun!</button>
+      <p id="loginError">Yah, password salah nih! Coba lagi ya!</p>
     </div>
   </div>
 
   <div class="landing-container">
     <h1 class="main-title">IPA: The Untold Stories</h1>
-    <p class="tagline">Cerita rahasia di balik dunia sains. Siap untuk mengeksplorasi?</p>
+    <p class="tagline">Cerita seru yang gak ada di buku sekolah! Ready to be shook? 🤯</p>
 
     <div class="action-btns">
-      <a href="story.html" class="btn-landing">📖 Baca Cerita</a>
+      <a href="story.html" class="btn-landing">📖 Baca Story</a>
     </div>
 
     <footer>
-      <p class="footer-text">by <strong>@ipadevpro</strong> ⚡</p>
+      <p class="footer-text">created with ❤️ by <strong>@ipadevpro</strong> ⚡</p>
     </footer>
   </div>
 

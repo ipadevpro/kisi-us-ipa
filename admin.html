@@ -3,62 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Cerita IPA</title>
+  <title>Admin Panel | IPA Stories</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tiny.cloud/1/b3qhsaf786u20qnu9zskxwlwqcmkhiaffsxsnyt4hb9seo79/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Outfit', sans-serif;
       margin: 0;
-      background: #f4f6f8;
-      padding: 30px;
+      background: linear-gradient(135deg, #4ECDC4, #556270);
+      padding: 40px 20px;
+      min-height: 100vh;
     }
 
     .admin-container {
       max-width: 800px;
       margin: auto;
       background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.6s ease;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(7px);
     }
 
-    h2 {
+    .admin-header {
+      margin-bottom: 30px;
       text-align: center;
-      color: #2c3e50;
+    }
+
+    .admin-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .admin-subtitle {
+      color: #555;
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto 20px;
     }
 
     label {
       font-weight: 600;
       display: block;
-      margin-top: 20px;
-      color: #34495e;
+      margin-top: 25px;
+      color: #333;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid #eee;
       margin-top: 5px;
-      font-size: 1em;
+      font-size: 1rem;
+      transition: all 0.3s;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #4ECDC4;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+    }
+
+    .tox-tinymce {
+      border-radius: 12px !important;
+      border: 2px solid #eee !important;
+      overflow: hidden;
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 1em;
-      background: #8E44AD;
+      margin-top: 30px;
+      padding: 16px 30px;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.3s ease;
+      font-weight: 700;
+      box-shadow: 0 7px 14px rgba(255, 107, 107, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     button:hover {
-      background: #732d91;
+      background: linear-gradient(135deg, #FF8E53, #FF6B6B);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
     }
 
     .back-btn {
@@ -69,37 +113,86 @@
 
     .back-btn a {
       text-decoration: none;
-      color: #3498db;
+      color: white;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 12px 25px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .back-btn a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .success-msg {
+      display: none;
+      background: rgba(78, 205, 196, 0.2);
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 20px;
+      color: #4ECDC4;
+      font-weight: 600;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
 
   <div class="admin-container">
-    <h2>✍️ Tulis Cerita IPA</h2>
+    <div class="admin-header">
+      <h1 class="admin-title">✨ Admin Panel</h1>
+      <p class="admin-subtitle">Bikin story seru apa nih hari ini? Gas tulis cerita kamu!</p>
+    </div>
 
-    <label for="judul">Judul Cerita</label>
-    <input type="text" id="judul" placeholder="Contoh: Rahasia Reaksi Kimia 🔥">
+    <label for="judul">Judul Story</label>
+    <input type="text" id="judul" placeholder="Masukin judul yg catchy biar pada klik! 🔥">
 
-    <label for="isiCerita">Isi Cerita</label>
+    <label for="isiCerita">Isi Story</label>
     <textarea id="isiCerita"></textarea>
 
-    <button onclick="simpanCerita()">💾 Simpan Cerita</button>
+    <div id="successMsg" class="success-msg">
+      Yeayy! Story kamu berhasil disimpan! 🎉
+    </div>
+
+    <button onclick="simpanCerita()">
+      <span>📱 Post Story</span>
+    </button>
 
     <div class="back-btn">
-      <a href="index.html">← Kembali ke Beranda</a>
+      <a href="index.html">← Balik ke Home</a>
     </div>
   </div>
 
   <script>
-    // Ganti dengan API key kamu dari tiny.cloud
+    // Setup TinyMCE
     tinymce.init({
       selector: '#isiCerita',
-      height: 300,
+      height: 400,
       menubar: false,
-      plugins: 'link image lists code',
-      toolbar: 'undo redo | formatselect | bold italic underline | bullist numlist | link image | code',
-      branding: false
+      plugins: 'link image lists code emoticons',
+      toolbar: 'undo redo | formatselect | bold italic underline | bullist numlist | link image emoticons | code',
+      branding: false,
+      skin: 'oxide',
+      content_css: 'default',
+      placeholder: 'Tulis cerita keren kamu disini... Jangan lupa tambahin emoji biar makin seru! 😎',
+      setup: function(editor) {
+        editor.on('change', function() {
+          editor.save();
+        });
+      }
     });
 
     function simpanCerita() {
@@ -107,7 +200,7 @@
       const isi = tinymce.get("isiCerita").getContent();
 
       if (!judul || !isi) {
-        alert("Isi semua field terlebih dahulu!");
+        alert("Eh bestie! Isi dulu judul dan ceritanya ya!");
         return;
       }
 
@@ -117,8 +210,18 @@
       semuaCerita.push(cerita);
       localStorage.setItem("ceritaIPA", JSON.stringify(semuaCerita));
 
-      alert("Cerita berhasil disimpan!");
-      window.location.href = "story.html";
+      // Show success message
+      const successMsg = document.getElementById("successMsg");
+      successMsg.style.display = "block";
+      
+      // Reset form
+      document.getElementById("judul").value = "";
+      tinymce.get("isiCerita").setContent("");
+      
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        window.location.href = "story.html";
+      }, 2000);
     }
   </script>
 </body>
