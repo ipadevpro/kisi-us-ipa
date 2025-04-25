@@ -5,12 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IPA: The Untold Stories</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Font vibe Gen Z -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      --secondary-gradient: linear-gradient(135deg, #4ECDC4, #556270);
+      --accent-color: #4ECDC4;
+      --dark-color: #333;
+      --light-color: #fff;
+      --card-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      --hover-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      --border-radius: 24px;
+      --transition: all 0.3s ease;
+    }
+    
     body {
       font-family: 'Outfit', sans-serif;
       margin: 0;
@@ -18,73 +29,213 @@
       color: #333;
       min-height: 100vh;
       position: relative;
+      overflow-x: hidden;
     }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,122.7C96,149,192,203,288,224C384,245,480,235,576,202.7C672,171,768,117,864,117.3C960,117,1056,171,1152,181.3C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+      background-size: cover;
+      background-position: bottom;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    .landing-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
     .landing-container {
+      max-width: 650px;
+      width: 100%;
+      padding: 60px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+      animation: fadeInUp 1s ease;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
       text-align: center;
-      padding: 70px 20px;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
     }
+
+    .landing-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: var(--primary-gradient);
+    }
+
     .main-title {
       font-size: 3.5rem;
       font-weight: 800;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+      margin-bottom: 15px;
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -1px;
       animation: pulse 2s infinite;
+      position: relative;
+      display: inline-block;
     }
+
+    .main-title::after {
+      content: '✨';
+      position: absolute;
+      top: -10px;
+      right: -25px;
+      font-size: 1.5rem;
+    }
+
     .tagline {
       font-size: 1.2rem;
-      opacity: 0.9;
+      color: #555;
       margin-bottom: 40px;
       font-weight: 500;
+      line-height: 1.6;
     }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--accent-color);
+    }
+
+    .feature-title {
+      font-weight: 700;
+      margin: 0 0 5px;
+      font-size: 1.1rem;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: #777;
+      margin: 0;
+    }
+
     .action-btns {
       margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    .btn-landing {
-      display: inline-block;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       padding: 16px 32px;
-      margin: 10px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      background: var(--primary-gradient);
       color: white;
       text-decoration: none;
-      box-shadow: 0 7px 14px rgba(255, 107, 107, 0.3);
-      transition: all 0.3s ease;
+      border-radius: 16px;
       font-weight: 700;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      box-shadow: 0 7px 14px rgba(255, 107, 107, 0.3);
+      border: none;
+      cursor: pointer;
     }
-    .btn-landing:hover {
+
+    .btn:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .btn.btn-alt {
+      background: var(--secondary-gradient);
+      box-shadow: 0 7px 14px rgba(78, 205, 196, 0.3);
+    }
+
+    .btn.btn-alt:hover {
+      box-shadow: 0 10px 20px rgba(78, 205, 196, 0.4);
+    }
+
+    .btn i {
+      font-size: 1.2rem;
     }
 
     .footer-text {
       margin-top: 60px;
       font-size: 1rem;
-      opacity: 0.8;
+      color: #666;
       font-weight: 500;
+    }
+
+    .footer-text strong {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
     }
 
     /* Tombol Admin Rahasia */
     #secretBtn {
       position: fixed;
-      top: 15px;
-      right: 15px;
-      background: transparent;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
       border: none;
-      font-size: 25px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
       cursor: pointer;
       color: white;
       z-index: 1000;
-      opacity: 0.6;
-      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
     }
+    
     #secretBtn:hover {
-      opacity: 1;
-      transform: scale(1.1) rotate(5deg);
+      background: rgba(255, 255, 255, 0.4);
+      transform: rotate(15deg);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     /* Modal */
@@ -98,13 +249,14 @@
       height: 100%;
       background-color: rgba(0,0,0,0.7);
       animation: fadeIn 0.3s ease;
+      backdrop-filter: blur(5px);
     }
 
     .modal-content {
       background-color: #fff;
       color: #333;
       margin: 15% auto;
-      padding: 35px;
+      padding: 40px;
       border-radius: 20px;
       width: 90%;
       max-width: 400px;
@@ -113,52 +265,48 @@
       animation: slideInUp 0.4s ease;
       border: 1px solid rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(7px);
+      position: relative;
+    }
+
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--primary-gradient);
+      border-radius: 20px 20px 0 0;
     }
 
     .modal-content h2 {
       font-size: 1.8rem;
       font-weight: 700;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-group {
       margin-bottom: 20px;
-      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
-    .modal-content input {
-      width: 85%;
-      padding: 14px;
-      margin-top: 15px;
+    .form-control {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
       border: 2px solid #eee;
-      border-radius: 12px;
       font-size: 1rem;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       font-family: 'Outfit', sans-serif;
+      background: #fafafa;
+      box-sizing: border-box;
     }
 
-    .modal-content input:focus {
+    .form-control:focus {
       outline: none;
-      border-color: #4ECDC4;
+      border-color: var(--accent-color);
       box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
-    }
-
-    .modal-content button {
-      margin-top: 20px;
-      padding: 14px 30px;
-      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-      border: none;
-      color: white;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 700;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-    }
-
-    .modal-content button:hover {
-      background: linear-gradient(135deg, #FF8E53, #FF6B6B);
-      transform: translateY(-3px);
-      box-shadow: 0 7px 14px rgba(255, 107, 107, 0.4);
+      background: white;
     }
 
     #loginError {
@@ -169,15 +317,59 @@
     }
 
     #closeModal {
-      float: right;
+      position: absolute;
+      top: 15px;
+      right: 20px;
       font-size: 24px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      color: #999;
+      background: none;
+      border: none;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
     #closeModal:hover {
       transform: rotate(90deg);
       color: #FF6B6B;
+      background: #f9f9f9;
+    }
+
+    .shape1, .shape2, .shape3 {
+      position: absolute;
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0.6;
+      filter: blur(60px);
+    }
+
+    .shape1 {
+      width: 300px;
+      height: 300px;
+      background: #FF6B6B;
+      top: -150px;
+      right: -150px;
+    }
+
+    .shape2 {
+      width: 200px;
+      height: 200px;
+      background: #4ECDC4;
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .shape3 {
+      width: 150px;
+      height: 150px;
+      background: #FAD961;
+      bottom: 50px;
+      right: -75px;
     }
 
     @keyframes pulse {
@@ -195,35 +387,326 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .landing-container {
+        padding: 40px 25px;
+        margin: 20px;
+        width: calc(100% - 40px);
+        max-width: 500px;
+      }
+      
+      .main-title {
+        font-size: 2.5rem;
+      }
+
+      .main-title::after {
+        right: -15px;
+        top: -5px;
+        font-size: 1.2rem;
+      }
+      
+      .tagline {
+        font-size: 1rem;
+        margin-bottom: 30px;
+      }
+      
+      .features {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .feature {
+        min-width: auto;
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+      }
+      
+      .action-btns {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 30px;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 1rem;
+      }
+
+      .footer-text {
+        margin-top: 40px;
+        font-size: 0.9rem;
+      }
+
+      #secretBtn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .modal-content {
+        padding: 30px 20px;
+        margin: 30% auto 0;
+      }
+
+      .modal-content h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .landing-container {
+        padding: 30px 20px;
+        margin: 15px;
+        width: calc(100% - 30px);
+      }
+      
+      .main-title {
+        font-size: 2rem;
+      }
+
+      .tagline {
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+      }
+      
+      .features {
+        margin-bottom: 25px;
+      }
+      
+      .feature {
+        padding: 15px;
+      }
+      
+      .feature-icon {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+      }
+      
+      .feature-title {
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+      
+      .feature-desc {
+        font-size: 0.85rem;
+      }
+
+      .form-control {
+        padding: 12px;
+      }
+
+      .btn {
+        padding: 12px 16px;
+        font-size: 0.95rem;
+      }
+      
+      .footer-text {
+        margin-top: 25px;
+        font-size: 0.85rem;
+      }
+
+      .shape1, .shape2, .shape3 {
+        filter: blur(40px);
+      }
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .main-container {
+        max-width: 100%;
+        padding: 15px;
+      }
+      
+      .page-header {
+        padding: 15px 10px;
+      }
+      
+      .page-title {
+        font-size: 1.8rem;
+      }
+      
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .story-card {
+        width: 100%;
+        padding: 20px;
+      }
+      
+      .story-title {
+        font-size: 1.4rem;
+      }
+      
+      .story-subtitle {
+        font-size: 1rem;
+      }
+      
+      .story-date {
+        font-size: 0.8rem;
+      }
+      
+      .search-container {
+        width: 100%;
+        max-width: none;
+      }
+      
+      .empty-state {
+        padding: 25px;
+      }
+      
+      .empty-state h2 {
+        font-size: 1.4rem;
+      }
+      
+      .empty-state p {
+        font-size: 0.9rem;
+      }
+      
+      .loading {
+        padding: 20px;
+      }
+      
+      .footer {
+        padding: 15px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    /* Small mobile styles */
+    @media (max-width: 480px) {
+      .main-container {
+        padding: 10px;
+      }
+      
+      .page-header {
+        padding: 12px 8px;
+      }
+      
+      .page-title {
+        font-size: 1.5rem;
+      }
+      
+      .story-card {
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+      
+      .story-title {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+      }
+      
+      .story-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      
+      .story-date {
+        font-size: 0.75rem;
+      }
+      
+      .search-input {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+      }
+      
+      .search-button {
+        padding: 8px 15px;
+      }
+      
+      .empty-state {
+        padding: 20px;
+      }
+      
+      .empty-state h2 {
+        font-size: 1.2rem;
+      }
+      
+      .empty-state p {
+        font-size: 0.85rem;
+      }
+      
+      .footer {
+        padding: 12px;
+        font-size: 0.8rem;
+      }
+    }
   </style>
 </head>
-<body class="landing-page">
+<body>
+  <div class="landing-page">
+    <!-- Shapes for background -->
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+    <div class="shape3"></div>
 
-  <!-- Tombol Rahasia Admin -->
-  <button id="secretBtn" title="🔐 Admin Mode">✨</button>
+    <!-- Tombol Rahasia Admin -->
+    <button id="secretBtn" title="🔐 Admin Mode"><i class="fas fa-key"></i></button>
 
-  <!-- Modal Login Admin -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span id="closeModal">&times;</span>
-      <h2>Login Admin</h2>
-      <input type="password" id="adminPassword" placeholder="Ketik password kamu disini...">
-      <button onclick="checkPassword()">Gaskeun!</button>
-      <p id="loginError">Yah, password salah nih! Coba lagi ya!</p>
+    <!-- Modal Login Admin -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <button id="closeModal" aria-label="Close"><i class="fas fa-times"></i></button>
+        <h2>Admin Login</h2>
+        <div class="form-group">
+          <input type="password" id="adminPassword" class="form-control" placeholder="Ketik password kamu disini...">
+        </div>
+        <button onclick="checkPassword()" class="btn">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>Gaskeun!</span>
+        </button>
+        <p id="loginError">Yah, password salah nih! Coba lagi ya!</p>
+      </div>
     </div>
-  </div>
 
-  <div class="landing-container">
-    <h1 class="main-title">IPA: The Untold Stories</h1>
-    <p class="tagline">Cerita seru yang gak ada di buku sekolah! Ready to be shook? 🤯</p>
+    <div class="landing-container">
+      <h1 class="main-title">IPA: The Untold Stories</h1>
+      <p class="tagline">Cerita seru yang gak ada di buku sekolah! Ready to be shook? 🤯</p>
 
-    <div class="action-btns">
-      <a href="story.html" class="btn-landing">📖 Baca Story</a>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon"><i class="fas fa-book"></i></div>
+          <h3 class="feature-title">Cerita Seru</h3>
+          <p class="feature-desc">Kumpulan cerita IPA yang bikin kamu penasaran</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="fas fa-star"></i></div>
+          <h3 class="feature-title">Knowledge</h3>
+          <p class="feature-desc">Tambah wawasan sains dengan cara seru</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+          <h3 class="feature-title">Inspirasi</h3>
+          <p class="feature-desc">Temukan inspirasi dan ide kreatif</p>
+        </div>
+      </div>
+
+      <div class="action-btns">
+        <a href="story.html" class="btn">
+          <i class="fas fa-book-open"></i>
+          <span>Baca Story</span>
+        </a>
+      </div>
+
+      <footer>
+        <p class="footer-text">created with ❤️ by <strong>Devi Saidulloh, S.Pd.</strong></p>
+      </footer>
     </div>
-
-    <footer>
-      <p class="footer-text">created with ❤️ by <strong>@ipadevpro</strong> ⚡</p>
-    </footer>
   </div>
 
   <script>

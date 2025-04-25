@@ -6,12 +6,146 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #FF6B6B, #FF8E53);
+      --secondary-gradient: linear-gradient(135deg, #4ECDC4, #556270);
+      --accent-color: #4ECDC4;
+      --dark-color: #333;
+      --light-color: #fff;
+      --card-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      --hover-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      --border-radius: 24px;
+      --transition: all 0.3s ease;
+    }
+    
     body {
       font-family: 'Outfit', sans-serif;
       background: linear-gradient(135deg, #FBAB7E 0%, #F7CE68 100%);
       min-height: 100vh;
       padding-bottom: 50px;
+      margin: 0;
+      color: var(--dark-color);
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,122.7C96,149,192,203,288,224C384,245,480,235,576,202.7C672,171,768,117,864,117.3C960,117,1056,171,1152,181.3C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+      background-size: cover;
+      background-position: bottom;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    /* Header */
+    .page-header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      position: relative;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0;
+      color: white;
+    }
+
+    /* Main content */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    
+    .page-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 30px 0 10px;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .page-title::after {
+      content: '✨';
+      position: absolute;
+      top: -10px;
+      right: -25px;
+      font-size: 1.5rem;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px 20px;
+      border-radius: 50px;
+      backdrop-filter: blur(5px);
+    }
+
+    .header-container {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: white;
+      color: var(--dark-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-btn i {
+      margin-right: 5px;
     }
     
     .story-container {
@@ -19,30 +153,9 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 25px;
-      padding: 40px 20px;
+      padding: 20px 0;
       max-width: 1200px;
       margin: 0 auto;
-    }
-
-    .page-title {
-      text-align: center;
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin: 40px 0 10px;
-      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -1px;
-    }
-
-    .page-subtitle {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #444;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .story-card {
@@ -53,9 +166,11 @@
       width: 300px;
       transition: all 0.3s ease;
       cursor: pointer;
-      border-left: 5px solid #4ECDC4;
       position: relative;
       overflow: hidden;
+      animation: fadeInUp 0.5s ease;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(7px);
     }
 
     .story-card::before {
@@ -65,7 +180,7 @@
       left: 0;
       width: 100%;
       height: 5px;
-      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+      background: var(--primary-gradient);
     }
 
     .story-card:hover {
@@ -73,34 +188,57 @@
       box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     }
 
+    .story-badge {
+      display: inline-block;
+      background: var(--primary-gradient);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
     .story-title {
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       margin-bottom: 12px;
-      color: #333;
+      color: var(--dark-color);
     }
 
     .story-content {
       font-size: 0.95rem;
       color: #555;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    .story-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      margin-bottom: 10px;
-      font-weight: 600;
+    .story-footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .story-date {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .story-action {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--accent-color);
     }
 
     .full-story {
       max-width: 800px;
       margin: 40px auto;
-      background: #fff;
+      background: white;
       padding: 40px;
       border-radius: 24px;
       box-shadow: 0 15px 30px rgba(0,0,0,0.08);
@@ -108,15 +246,55 @@
       animation: fadeInUp 0.5s ease;
       border: 1px solid rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(7px);
+      position: relative;
+    }
+
+    .full-story::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: var(--primary-gradient);
+      border-radius: 24px 24px 0 0;
     }
 
     .full-story h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
       margin-bottom: 20px;
-      background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--dark-color);
+      position: relative;
+    }
+
+    .full-story-badge {
+      display: inline-block;
+      background: var(--primary-gradient);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .full-story-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+      color: #777;
+      flex-wrap: wrap;
+    }
+
+    .full-story-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .full-story #fullContent {
@@ -125,15 +303,24 @@
       color: #444;
     }
 
+    .full-story #fullContent img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 20px 0;
+      height: auto;
+    }
+
     .back-btn {
       margin-top: 30px;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
-      color: #4ECDC4;
+      color: var(--accent-color);
       font-weight: 700;
       cursor: pointer;
       font-size: 1.1rem;
       transition: all 0.3s ease;
+      gap: 8px;
     }
 
     .back-btn:hover {
@@ -141,38 +328,114 @@
       transform: translateX(-5px);
     }
 
-    .home-link {
-      text-align: center;
-      margin-top: 40px;
+    /* Home link */
+    .action-btns {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 40px 0;
+      flex-wrap: wrap;
     }
 
-    .home-link a {
-      text-decoration: none;
-      background: linear-gradient(135deg, #4ECDC4, #556270);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--primary-gradient);
       color: white;
-      padding: 12px 25px;
-      border-radius: 12px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: var(--transition);
+      box-shadow: 0 7px 14px rgba(255, 107, 107, 0.3);
     }
 
-    .home-link a:hover {
-      background: linear-gradient(135deg, #556270, #4ECDC4);
-      transform: translateY(-3px);
-      box-shadow: 0 7px 14px rgba(78, 205, 196, 0.4);
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .btn.btn-alt {
+      background: var(--secondary-gradient);
+      box-shadow: 0 7px 14px rgba(78, 205, 196, 0.3);
+    }
+
+    .btn.btn-alt:hover {
+      box-shadow: 0 10px 20px rgba(78, 205, 196, 0.4);
     }
 
     .loading {
       text-align: center;
       padding: 50px;
       font-size: 1.2rem;
-      color: #333;
+      color: var(--dark-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
     }
 
-    .loading img {
+    .loading-icon {
       width: 50px;
-      margin-bottom: 15px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--accent-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      margin: 30px auto;
+      max-width: 500px;
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    .empty-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--dark-color);
+    }
+
+    .empty-desc {
+      color: #777;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    .app-footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .app-footer strong {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
     }
 
     @keyframes fadeInUp {
@@ -185,30 +448,213 @@
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 12px 0;
+        margin-bottom: 30px;
+      }
+      
+      .page-header h1 {
+        font-size: 1.5rem;
+      }
+      
+      .page-title {
+        font-size: 2.2rem;
+        margin: 20px 0 10px;
+      }
+      
+      .page-title::after {
+        right: -15px;
+        top: -5px;
+        font-size: 1.2rem;
+      }
+      
+      .page-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        padding: 8px 15px;
+      }
+      
+      .filters {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      
+      .filter-btn {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+      }
+      
+      .story-card {
+        width: 100%;
+        padding: 20px;
+      }
+      
+      .full-story {
+        padding: 25px;
+        margin: 20px auto;
+        border-radius: 20px;
+      }
+      
+      .full-story h2 {
+        font-size: 1.8rem;
+      }
+      
+      .full-story-meta {
+        gap: 10px;
+      }
+      
+      .full-story #fullContent {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+      
+      .action-btns {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+      }
+      
+      .empty-state {
+        padding: 40px 20px;
+      }
+      
+      .empty-icon {
+        font-size: 2.5rem;
+      }
+      
+      .empty-title {
+        font-size: 1.3rem;
+      }
+      
+      .loading {
+        padding: 30px;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 1.8rem;
+      }
+      
+      .page-subtitle {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+      }
+      
+      .story-title {
+        font-size: 1.1rem;
+      }
+      
+      .story-content {
+        font-size: 0.9rem;
+      }
+      
+      .story-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      
+      .full-story {
+        padding: 20px 15px;
+      }
+      
+      .full-story h2 {
+        font-size: 1.5rem;
+      }
+      
+      .full-story #fullContent {
+        font-size: 0.95rem;
+      }
+      
+      .back-btn {
+        font-size: 0.95rem;
+      }
+      
+      .btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+      
+      .loading-icon {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .empty-desc {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1 class="page-title">IPA Stories ✨</h1>
-  <p class="page-subtitle">Kumpulan cerita seru yang bakal bikin kamu penasaran dan mind-blown!</p>
+  <header class="page-header">
+    <h1>IPA Stories Dashboard</h1>
+  </header>
+
+  <div class="main-container">
+    <div class="header-container">
+      <h1 class="page-title">IPA Stories</h1>
+      <p class="page-subtitle">Kumpulan cerita seru yang bakal bikin kamu penasaran dan mind-blown!</p>
+      
+      <div class="filters">
+        <button class="filter-btn active"><i class="fas fa-globe"></i> Semua Cerita</button>
+      </div>
+    </div>
   
-  <div class="story-container" id="storyList">
-    <div class="loading">
-      <div>Loading stories...</div>
-      <div>Tunggu bentar ya bestie!</div>
+    <div class="story-container" id="storyList">
+      <div class="loading">
+        <div class="loading-icon"></div>
+        <div>Loading stories...</div>
+        <div>Tunggu bentar ya bestie!</div>
+      </div>
+    </div>
+
+    <div class="full-story" id="fullStory">
+      <div class="full-story-badge" id="storyCategory">IPA Story</div>
+      <h2 id="fullTitle"></h2>
+      <div class="full-story-meta">
+        <span><i class="far fa-calendar"></i> <span id="storyDate">19 April 2023</span></span>
+        <span><i class="far fa-eye"></i> 123 views</span>
+      </div>
+      <div id="fullContent"></div>
+      <a class="back-btn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+        <span>Balik ke list story</span>
+      </a>
+    </div>
+
+    <div class="action-btns">
+      <a href="index.html" class="btn btn-alt">
+        <i class="fas fa-home"></i>
+        <span>Back to Home</span>
+      </a>
     </div>
   </div>
 
-  <div class="full-story" id="fullStory">
-    <h2 id="fullTitle"></h2>
-    <div id="fullContent"></div>
-    <a class="back-btn" onclick="goBack()">⬅️ Balik ke list story</a>
-  </div>
-
-  <div class="home-link">
-    <a href="index.html">🏠 Back to Home</a>
-  </div>
+  <footer class="app-footer">
+    &copy; 2023 IPA Stories. Created with ❤️ by <strong>Devi Saidulloh, S.Pd.</strong>
+  </footer>
 
   <script>
+    // Filter button sudah disederhanakan
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
     const endpoint = 'https://script.google.com/macros/s/AKfycbzT68ohmGP_QnZHrtnN_VcS_cXuaZ-KiYbTgnxVu_xt0gTm3MAjvpKRzfa42Ji9qIF_Lw/exec';
 
     fetch(endpoint)
@@ -218,45 +664,86 @@
         list.innerHTML = ''; // Clear loading message
         
         if (data.cerita.length === 0) {
-          list.innerHTML = '<div class="loading">Belum ada story nih! Coba balik lagi nanti ya!</div>';
+          list.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-book"></i></div>
+              <h3 class="empty-title">Belum ada story nih!</h3>
+              <p class="empty-desc">Story belum dibuat atau masih dalam proses. Coba balik lagi nanti ya!</p>
+              <a href="admin.html" class="btn">
+                <i class="fas fa-plus"></i>
+                <span>Buat Story</span>
+              </a>
+            </div>
+          `;
           return;
         }
         
-        data.cerita.forEach((cerita, i) => {
+        // Mengurutkan cerita berdasarkan tanggal terbaru
+        const sortedCerita = [...data.cerita].sort((a, b) => {
+          return new Date(b.waktu) - new Date(a.waktu);
+        });
+        
+        sortedCerita.forEach((cerita, i) => {
           const div = document.createElement('div');
           div.className = 'story-card';
           
           // Extract first 100 characters for preview
           const preview = cerita.isi.replace(/<[^>]*>/g, '').slice(0, 100);
           
+          // Format date
+          let dateDisplay = 'Baru ditambahkan';
+          if (cerita.waktu) {
+            const date = new Date(cerita.waktu);
+            dateDisplay = date.toLocaleDateString('id-ID', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            });
+          }
+          
           div.innerHTML = `
             <div class="story-badge">IPA Story #${i+1}</div>
-            <div class="story-title">${cerita.judul}</div>
+            <h3 class="story-title">${cerita.judul}</h3>
             <div class="story-content">${preview}...</div>
+            <div class="story-footer">
+              <div class="story-date">
+                <i class="far fa-calendar"></i>
+                <span>${dateDisplay}</span>
+              </div>
+              <div class="story-action">
+                <span>Baca</span>
+                <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
           `;
-          div.onclick = () => showFull(cerita.judul, cerita.isi);
+          div.onclick = () => showFull(cerita.judul, cerita.isi, dateDisplay);
           div.style.animationDelay = `${i * 0.1}s`;
           list.appendChild(div);
         });
       })
       .catch(error => {
         document.getElementById('storyList').innerHTML = `
-          <div class="loading">
-            <div>Oops! Gagal loading story 😭</div>
-            <div>Coba refresh atau balik lagi nanti ya!</div>
+          <div class="empty-state">
+            <div class="empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 class="empty-title">Oops! Gagal loading story 😭</h3>
+            <p class="empty-desc">Server sedang sibuk atau koneksi terputus. Coba refresh atau balik lagi nanti ya!</p>
+            <button onclick="location.reload()" class="btn">
+              <i class="fas fa-sync"></i>
+              <span>Refresh</span>
+            </button>
           </div>
         `;
         console.error('Error fetching stories:', error);
       });
 
-    function showFull(judul, isi) {
+    function showFull(judul, isi, date) {
       document.getElementById('storyList').style.display = 'none';
       document.getElementById('fullStory').style.display = 'block';
       document.getElementById('fullTitle').innerText = judul;
       document.getElementById('fullContent').innerHTML = isi;
-      document.querySelector('.home-link').style.display = 'none';
-      document.querySelector('.page-title').style.display = 'none';
-      document.querySelector('.page-subtitle').style.display = 'none';
+      document.getElementById('storyDate').innerText = date || 'Baru ditambahkan';
+      document.querySelector('.header-container').style.display = 'none';
+      document.querySelector('.action-btns').style.display = 'none';
       
       // Scroll to top
       window.scrollTo({top: 0, behavior: 'smooth'});
@@ -265,9 +752,8 @@
     function goBack() {
       document.getElementById('storyList').style.display = 'flex';
       document.getElementById('fullStory').style.display = 'none';
-      document.querySelector('.home-link').style.display = 'block';
-      document.querySelector('.page-title').style.display = 'block';
-      document.querySelector('.page-subtitle').style.display = 'block';
+      document.querySelector('.header-container').style.display = 'block';
+      document.querySelector('.action-btns').style.display = 'flex';
     }
   </script>
 </body>
