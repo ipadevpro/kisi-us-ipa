@@ -397,7 +397,7 @@
     @media (max-width: 768px) {
       .landing-container {
         padding: 40px 25px;
-        margin: 20px;
+        margin: 20px auto;
         width: calc(100% - 40px);
         max-width: 500px;
       }
@@ -420,6 +420,7 @@
       .features {
         flex-direction: column;
         gap: 15px;
+        width: 100%;
       }
 
       .feature {
@@ -427,6 +428,8 @@
         width: 100%;
         max-width: 100%;
         flex: none;
+        box-sizing: border-box;
+        margin-bottom: 5px;
       }
       
       .action-btns {
@@ -436,7 +439,7 @@
       }
       
       .btn {
-        width: 100%;
+        /* width: 100%; */ /* Dihapus agar tombol tidak full-width */
         justify-content: center;
         padding: 14px 20px;
         font-size: 1rem;
@@ -469,8 +472,9 @@
     @media (max-width: 480px) {
       .landing-container {
         padding: 30px 20px;
-        margin: 15px;
+        margin: 15px auto;
         width: calc(100% - 30px);
+        max-width: 100%;
       }
       
       .main-title {
@@ -484,10 +488,14 @@
       
       .features {
         margin-bottom: 25px;
+        gap: 12px;
       }
       
       .feature {
         padding: 15px;
+        min-width: 100%;
+        width: 100%;
+        margin-bottom: 5px;
       }
       
       .feature-icon {
@@ -502,6 +510,7 @@
       
       .feature-desc {
         font-size: 0.85rem;
+        line-height: 1.4;
       }
 
       .form-control {
